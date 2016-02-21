@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.3.3
-Release:        4.11%{?dist}
+Release:        4.12%{?dist}
 Summary:        A JSON StAX implementation
 License:        ASL 2.0
 URL:            http://jettison.codehaus.org/
@@ -22,14 +22,14 @@ Patch0: %{pkg_name}-update-woodstox-version.patch
 %endif
 BuildRequires:     %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:     %{?scl_prefix_java_common}maven-local
-BuildRequires:     maven30-maven-compiler-plugin
-BuildRequires:     maven30-maven-install-plugin
-BuildRequires:     maven30-maven-jar-plugin
-BuildRequires:     maven30-maven-javadoc-plugin
-BuildRequires:     maven30-maven-release-plugin
-BuildRequires:     maven30-maven-resources-plugin
-BuildRequires:     maven30-woodstox-core
-BuildRequires:     maven30-stax2-api
+BuildRequires:     %{?scl_prefix}maven-compiler-plugin
+BuildRequires:     %{?scl_prefix}maven-install-plugin
+BuildRequires:     %{?scl_prefix}maven-jar-plugin
+BuildRequires:     %{?scl_prefix}maven-javadoc-plugin
+BuildRequires:     %{?scl_prefix}maven-release-plugin
+BuildRequires:     %{?scl_prefix}maven-resources-plugin
+BuildRequires:     %{?scl_prefix}woodstox-core
+BuildRequires:     %{?scl_prefix}stax2-api
 
 
 %description
@@ -49,7 +49,7 @@ This package contains the API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch0 -p1
 # We don't need wagon-webdav
@@ -59,7 +59,7 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Disable the tests until BZ#796739 is fixed:
 %mvn_build -f -- -Dproject.build.sourceEncoding=UTF-8
@@ -67,7 +67,7 @@ set -e -x
 
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -82,6 +82,9 @@ set -e -x
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.3.3-4.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.3.3-4.11
 - maven33 rebuild
 
