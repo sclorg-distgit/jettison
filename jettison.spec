@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.3.3
-Release:        4.12%{?dist}
+Release:        4.13%{?dist}
 Summary:        A JSON StAX implementation
 License:        ASL 2.0
 URL:            http://jettison.codehaus.org/
@@ -21,7 +21,7 @@ Patch0: %{pkg_name}-update-woodstox-version.patch
 %else
 %endif
 BuildRequires:     %{?scl_prefix_java_common}javapackages-tools
-BuildRequires:     %{?scl_prefix_java_common}maven-local
+BuildRequires:     %{?scl_prefix}maven-local
 BuildRequires:     %{?scl_prefix}maven-compiler-plugin
 BuildRequires:     %{?scl_prefix}maven-install-plugin
 BuildRequires:     %{?scl_prefix}maven-jar-plugin
@@ -82,6 +82,9 @@ set -e -x
 
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.3.3-4.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.3.3-4.12
 - maven33 rebuild #2
 
